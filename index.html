@@ -963,9 +963,10 @@ body{
     const m=getActiveMedia();
     if(!m.src||m.src===window.location.href){playIdx(curIdx);return}
     if(m.paused){
+      crossfadeIn(m,getTargetVol(),180);
       const p=m.play();p&&p.catch(()=>{});
       setPlayBtn(true);
-      setDiscSpinning(true);
+      if(!videoShowing())setDiscSpinning(true);
     }else{
       const m2=m;
       crossfadeOut(m2,250,()=>{m2.pause()});
